@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>ホーム</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+  <script th:src="@{/js/layout.js}" defer></script>
+  <script th:src="@{/js/home.js}" defer></script>
+</head>
+<body>
+  
+  <!-- ヘッダー -->
+  <div th:replace="fragments/header :: header"></div>
+
+  <div class="main-layout">
+    <!-- サイドバー -->
+    <div th:insert="fragments/sidebar :: sidebar"></div>
+
+    <!-- メインコンテンツ -->
+    <div class="content">
+      <!-- パンくずリスト -->
+      <div id="breadcrumb" class="breadcrumb">
+        <span class="breadcrumb-item" data-action="home" th:text="${company.name}">会社名</span>
+      </div>
+
+      <!-- 部署一覧 -->
+      <div id="departmentList" class="box-container">
+        <div th:each="dept : ${departments}" class="box dept-box"
+             th:attr="data-id=${dept.id}" th:text="${dept.name}"></div>
+      </div>
+
+      <!-- チーム一覧 -->
+      <div id="teamList" class="box-container" style="display:none;">
+        <!-- JSで差し替え -->
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

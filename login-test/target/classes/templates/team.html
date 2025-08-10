@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${team.name}">Team</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+<div th:insert="fragments/sidebar :: sidebar"></div>
+
+<div class="main-content">
+  <h1 th:text="${team.name}">Team Name</h1>
+
+  <!-- メッセージ一覧 -->
+  <div class="message-list">
+    <div th:each="msg : ${messages}" class="message-item">
+      <p th:text="${msg.content}">Message content</p>
+      <small th:text="${#temporals.format(msg.createdAt, 'yyyy-MM-dd HH:mm')}">2025-08-10</small>
+    </div>
+  </div>
+
+  <!-- メッセージ投稿フォーム -->
+  <form th:action="@{'/teams/' + ${team.id} + '/messages'}" method="post">
+    <textarea name="content" placeholder="メッセージを入力..." required></textarea>
+    <button type="submit">送信</button>
+  </form>
+</div>
+
+</body>
+</html>
